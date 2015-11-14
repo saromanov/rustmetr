@@ -1,69 +1,80 @@
 use std::collections::HashMap;
+use config::*;
 
 pub trait IMetrics {
 
 }
 
-pub struct Rustmetr {
+pub struct RustMetr {
     counter: i32,
     item: i32,
-    config: Config,
-    items: HashMap,
-    counters: HashMap,
-    vec: Vec<string>,
-    limit: i32,
+    //config: Config,
+    items: HashMap<String, i32>,
+    counters: HashMap<String, i32>,
+    vec: Vec<String>,
+    limit: usize,
 
 }
 
 impl RustMetr {
-    fn new(&self) -> Rustmetr {
-        if limit <= 0 {
-             Rustmetr{
+    fn new(&self) -> RustMetr {
+        if self.limit <= 0 {
+             RustMetr{
                  items: HashMap::new(),
                  counters: HashMap::new(),
                  vec: Vec::new(), 
+                 item: 0,
+                 limit:self.limit,
+                 counter: 0
              }
 
         } else {
-             Rustmetr{
-                items: HashMap::with_capacity(limit),
-                counters: HashMap::with_capacity(limit),
+             RustMetr{
+                items: HashMap::with_capacity(self.limit),
+                counters: HashMap::with_capacity(self.limit),
                 vec: Vec::new(), 
+                item: 0,
+                limit:self.limit,
+                counter: 0
+
           }
 
         }
     }
-    fn event(&self, msg: string, count:i32) -> i32 {
-        
+    fn event(&self, msg: String, count:i32) -> i32 {
+       1 
     }
 
     //events of several items
     //return number of events in transaction
     fn events(&self, items: Vec<String>) -> i32 {
         if self.vec.len() == 0 {
-            0
+            return 0
         }
 
-        let expected = vec.len();
+        let expected = self.vec.len();
 
         1
     }
 
     fn transaction(items: Vec<Vec<i32>>) -> Option<i32> {
-
+        Some(1)
     }
 
-    fn increment(&self, msg: string) -> Option<i32> {
+    fn increment(&self, msg: &String) -> Option<i32> {
         if msg == "" {
-            None
+            return None
         }
 
-        match self.counter.get(msg) {
+        match self.counters.get(msg) {
             Some(x) => {
-                self.counter.insert(msg, x+1);
-                Some(1)
+                let mut hmnew = HashMap::new();
+                hmnew.get_mut(&self.counters);
+                return Some(1)
             }
-            None => None
+            None => {
+                return None
+            }
         }
         Some(1)
     }

@@ -1,6 +1,6 @@
 
 pub struct Config {
-    name: String
+    name: String,
     //Need to periodic update path for config
     path: String
 }
@@ -8,7 +8,7 @@ pub struct Config {
 
 /// Load config data
 impl Config {
-    pub fn(path: String) -> Config {
-        Config{name: "Default"}
+    fn new(path: String) -> Config {
+        Config{name: path, path:path}
     }
 }
