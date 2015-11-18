@@ -8,7 +8,7 @@ pub struct Config {
 
 /// Load config data
 impl Config {
-    fn new(path: String) -> Config {
-        Config{name: path, path:path}
+    fn new(name: String, path: String) -> Config {
+        Config{name: name, path:path}
     }
 }
