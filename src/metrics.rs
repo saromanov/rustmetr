@@ -66,12 +66,14 @@ impl RustMetr {
             return None
         }
 
-        match self.counters.get(&msg) {
+        match self.counters.get_mut(&msg) {
             Some(x) => {
-                let mut hmnew = HashMap::new();
-                hmnew.insert(msg, 1);
+                //let mut hmnew = HashMap::new();
+                //hmnew.insert(msg, 1);
                 //hmnew.get_mut(&self.counters);
                 //self.counters.insert(msg, 1);
+                //self.counters = hmnew;
+                //x+=1;
                 return Some(1)
             }
             None => {
@@ -79,6 +81,12 @@ impl RustMetr {
             }
         }
         Some(1)
+    }
+
+    //
+    fn get(&self, title: &String) -> Option<&i32> {
+        let result = self.counters.get(title);
+        return result
     }
 }
 
