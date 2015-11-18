@@ -61,15 +61,17 @@ impl RustMetr {
         Some(1)
     }
 
-    fn increment(&self, msg: &String) -> Option<i32> {
+    fn increment(&mut self, msg: String) -> Option<i32> {
         if msg == "" {
             return None
         }
 
-        match self.counters.get(msg) {
+        match self.counters.get(&msg) {
             Some(x) => {
                 let mut hmnew = HashMap::new();
-                hmnew.get_mut(&self.counters);
+                hmnew.insert(msg, 1);
+                //hmnew.get_mut(&self.counters);
+                //self.counters.insert(msg, 1);
                 return Some(1)
             }
             None => {
