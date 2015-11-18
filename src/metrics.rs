@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use config::*;
+use std::result;
 
 pub trait IMetrics {
 
@@ -61,26 +62,21 @@ impl RustMetr {
         Some(1)
     }
 
-    fn increment(&mut self, msg: String) -> Option<i32> {
+    fn increment(&mut self, msg: String) -> Result<i32, &'static str> {
         if msg == "" {
-            return None
+            return Err(&"Message must be with name");
         }
 
         match self.counters.get_mut(&msg) {
             Some(x) => {
-                //let mut hmnew = HashMap::new();
-                //hmnew.insert(msg, 1);
-                //hmnew.get_mut(&self.counters);
-                //self.counters.insert(msg, 1);
-                //self.counters = hmnew;
-                //x+=1;
-                return Some(1)
+                *x+=1;
+                return Ok(1);
             }
             None => {
-                return None
+                return Err(&"Item not found");
             }
         }
-        Some(1)
+        return Ok(1);
     }
 
     //
